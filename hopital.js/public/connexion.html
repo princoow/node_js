@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire Connexion</title>
+    <link rel="stylesheet" href="css/formulaire.css">
+</head>
+<body>
+    <div class="form-container">
+        <!-- Formulaire Connexion -->
+        <form id="loginForm" method="post" class="form">
+            <h2>Connexion</h2>
+
+            <div class="input-group">
+                <input type="email" id="email" name="email" required>
+                <label for="email">Email</label>
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="password" name="mot_de_passe" required>
+                <label for="password">Mot de passe</label>
+            </div>
+
+            <!-- Nouveau champ Statut -->
+            <div class="input-group">
+                <select id="statut" name="statut" required>
+                    <option value="" disabled selected>Votre statut</option>
+                    <option value="patient">Patient</option>
+                    <option value="secretaire">Secrétaire</option>
+                </select>
+            </div>
+
+            <button type="submit" class="submit-btn">Se connecter</button>
+        </form>
+
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", async (event) => {
+            event.preventDefault(); // Empêcher le rechargement de la page
+        
+            const email = document.getElementById("email").value;
+            const mot_de_passe = document.getElementById("password").value;
+            const statut = document.getElementById("statut").value;
+
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, mot_de_passe, statut }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                window.location.href = data.redirect; 
+            } else {
+                alert(data.message); 
+            }
+        });
+    </script>
+
+</body>
+</html>

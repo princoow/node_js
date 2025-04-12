@@ -1,0 +1,101 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: century;
+}
+
+header{
+  background-image: url(../images/image2.jpeg);
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+ul{
+  list-style: none;
+  float: right;
+  display: flex;
+  margin-top: 20px;
+}
+
+ul li a{
+  text-decoration: none;
+  color: #fff;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  border: 1px solid #fff;
+  margin: 10px;
+  font-weight: 500;
+  transition: 0.6s ease;
+}
+
+ul li a:hover{
+  background: #fff;
+  color: #000;
+}
+
+ul li.active a{
+  background: #fff;
+  color: #000;
+  
+}
+
+.principale{
+  max-width: 114rem;
+  margin: 0 auto;
+}
+.titre{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.titre h1 {
+  font-family: 'Arial', sans-serif;
+  font-size: 50px;
+  text-align: center;
+  color: #fff;
+  position: relative;
+  letter-spacing: 3px;
+  animation: defilement 3s ease-in-out infinite;
+  
+  
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.titre h1::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(90deg, #ff0000, #00ff00, #0000ff, #ffff00);
+  background-size: 300%;
+  color: transparent;
+  z-index: -1;
+  
+}
+
+.bouton{
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.bouton a{
+  color: #fff;
+  text-decoration: none;
+  border: 1px solid #fff;
+  padding: 10px 20px;
+}
+.btn{
+  transition: 00.6s ease;
+}
+
+.btn:hover{
+  background-color: #fff;
+  color: #000;
+}

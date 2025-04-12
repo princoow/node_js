@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prise de RDV - Hôpital</title>
+    <link rel="stylesheet" href="css/rendez-vous.css">
+</head>
+<body>
+
+    <!-- Barre de navigation 
+    <header>
+       <nav>
+       </nav>
+    </header>  -->
+
+    <!-- Section de prise de rendez-vous -->
+    <section class="rdv">
+        <div class="container">
+            <h2>Prendre un Rendez-vous</h2>
+            <form id="appointmentForm">
+                <label for="name">Nom :</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="prenom">Prénom :</label>
+                <input type="text" id="prenom" name="prenom" required>
+
+                <label for="email">E-mail :</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="phone">Téléphone :</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <label for="date">Date du Rendez-vous :</label>
+                <input type="date" id="date" name="date" required>
+
+                <label for="specialty">Spécialité :</label>
+                <select id="specialty" name="specialty" required>
+                    <option value="">Sélectionnez </option>
+                    <option value="generaliste">Médecin Généraliste</option>
+                    <option value="cardiologue">Cardiologue</option>
+                    <option value="dentiste">Dentiste</option>
+                    <option value="dermatologue">Dermatologue</option>
+                    <option value="Pneumoloque">Pneumoloque</option>
+                    <option value="Neuroloque">Neuroloque</option>
+                    <option value="Gastro-entérologue">Gastro-entérologue</option>
+                    <option value="Néphrologue">Néphrologue</option>
+                    <option value="Rhumatologue">Rhumatologue</option>
+                    <option value="Pédiatre">Pédiatre</option>
+                    <option value="Gynécologue-obstétricien">Gynécologue-obstétricien</option>
+                    <option value="Chirugien">Chirugien</option>
+                    <option value="Radiologue">Radiologue</option>
+                    <option value="Oncologue">Oncologue</option>
+                </select>
+
+                <button type="submit">Confirmer</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById("appointmentForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+            const date = document.getElementById("date").value;
+            const specialty = document.getElementById("specialty").value;
+
+            // Envoi des données au backend via POST
+            fetch('http://localhost:3000/api/appointments', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    date: date,
+                    specialty: specialty
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Réponse du serveur:", data);
+                alert("Rendez-vous confirmé!");
+            })
+            .catch((error) => {
+                console.error('Erreur:', error);
+                alert("Une erreur est survenue lors de la prise de rendez-vous.");
+            });
+        });
+    </script>
+
+</body>
+</html>
